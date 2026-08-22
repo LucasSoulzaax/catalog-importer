@@ -8,7 +8,7 @@
     "dev": "node --watch server.js"
   },
   "dependencies": {
-    "express": "^5.1.0",
-    "playwright": "^1.58.0"
+    "express": "5.1.0",
+    "playwright": "1.62.1"
   }
 }
