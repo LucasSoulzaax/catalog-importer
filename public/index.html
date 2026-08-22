@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Importador de Cardápios</title>
+
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+
+  <body>
+    <main class="container">
+      <header>
+        <span class="pill">MVP</span>
+        <h1>Importador de Cardápios</h1>
+        <p>
+          Cole a URL de um cardápio MenuDino para extrair
+          categorias, produtos, imagens, descrições e preços.
+        </p>
+      </header>
+
+      <section class="panel">
+        <label for="url">URL do cardápio</label>
+
+        <div class="form-row">
+          <input
+            id="url"
+            type="url"
+            placeholder="https://seu-cardapio.menudino.com/..."
+          />
+
+          <button id="importButton">
+            Importar catálogo
+          </button>
+        </div>
+
+        <div id="status" class="status hidden"></div>
+      </section>
+
+      <section id="summary" class="summary hidden">
+        <article>
+          <span>Plataforma</span>
+          <strong id="platform">—</strong>
+        </article>
+
+        <article>
+          <span>Categorias</span>
+          <strong id="categoryCount">0</strong>
+        </article>
+
+        <article>
+          <span>Produtos</span>
+          <strong id="productCount">0</strong>
+        </article>
+      </section>
+
+      <section id="preview" class="panel hidden">
+        <div class="section-title">
+          <div>
+            <h2>Prévia da importação</h2>
+            <p id="storeName"></p>
+          </div>
+
+          <button id="downloadButton" class="success">
+            Baixar TSV
+          </button>
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Categoria</th>
+                <th>Produto</th>
+                <th>Descrição</th>
+                <th>Valor</th>
+                <th>Imagem</th>
+              </tr>
+            </thead>
+
+            <tbody id="catalogBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
