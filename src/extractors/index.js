@@ -1,13 +1,26 @@
 import { importMenuDino } from './menudino.js';
+import { importAnotaAi } from './anota-ai.js';
+import { importIFood } from './ifood.js';
 
 export function detectPlatform(url) {
   const hostname = new URL(url).hostname.toLowerCase();
 
-  if (
-    hostname.includes('menudino.com') ||
-    hostname.includes('menudino')
-  ) {
+  if (hostname.includes('menudino')) {
     return 'MENUDINO';
+  }
+
+  if (
+    hostname.includes('anota.ai') ||
+    hostname.includes('anotaai')
+  ) {
+    return 'ANOTA_AI';
+  }
+
+  if (
+    hostname.includes('ifood.com.br') ||
+    hostname.includes('ifood')
+  ) {
+    return 'IFOOD';
   }
 
   if (hostname.includes('multipedidos')) {
@@ -18,26 +31,25 @@ export function detectPlatform(url) {
     return 'GOOMER';
   }
 
-  if (hostname.includes('anota')) {
-    return 'ANOTA_AI';
-  }
-
-  if (hostname.includes('ifood')) {
-    return 'IFOOD';
-  }
-
   return 'UNKNOWN';
 }
 
 export async function importCatalog({ url, page }) {
   const platform = detectPlatform(url);
 
-  if (platform === 'MENUDINO') {
-    return importMenuDino({ url, page });
-  }
+  switch (platform) {
+    case 'MENUDINO':
+      return importMenuDino({ url, page });
 
-  throw new Error(
-    `Plataforma não suportada neste MVP: ${platform}. ` +
-    `Teste inicialmente com um link MenuDino.`
-  );
+    case 'ANOTA_AI':
+      return importAnotaAi({ url, page });
+
+    case 'IFOOD':
+      return importIFood({ url, page });
+
+    default:
+      throw new Error(
+        `Plataforma não suportada neste momento: ${platform}`
+      );
+  }
 }
